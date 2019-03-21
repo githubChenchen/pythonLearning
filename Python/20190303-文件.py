@@ -1,0 +1,10 @@
+f=open('myfile.txt','w+')
+str1=['abc','def','ghi']
+f.writelines(str1)
+print(f.tell())#tell表示文件指针的当前位置
+f.seek(0)
+print(f.tell())
+f1=f.read(2)
+print(f.tell())
+f.seek(1,0)#第一个参数为偏移量；第二个参数为文件位置，0：文件头，1：文件当前位置，2：文件尾
+print(f.tell())
