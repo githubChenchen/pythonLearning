@@ -1,6 +1,8 @@
 import requests,re
 from bs4 import BeautifulSoup
 import pandas as pd
+from pyecharts.charts import Line
+from pyecharts import options as opts
 import matplotlib.pyplot as plt
 
 
@@ -193,6 +195,15 @@ if __name__ == '__main__':
     dfSalary = cleanData(salaryDict) #处理过的数据
 
     print(over(dfSalary,10000))  #工资高于10000职位所占比例
+
+    li = dfSalary.salary.tolist()
+    line = (
+        Line().
+            add_xaxis(dfSalary.name.tolist()).
+            add_yaxis('python', li).
+            set_global_opts(title_opts=opts.TitleOpts(title='python工资分布'))
+    )
+    line.render()
 
     saveDataCsv(dfSalary)  #保存数据到csv
     dfSalary.plot()
