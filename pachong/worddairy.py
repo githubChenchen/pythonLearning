@@ -18,7 +18,7 @@ def word_cloud():
                 if item['flag'] == 'a':
                     wordList.append(item['word'])
     count = Counter(wordList)
-    
+
 
 if __name__ == '__main__':
     word_cloud()

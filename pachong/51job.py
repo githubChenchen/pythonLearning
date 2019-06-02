@@ -6,13 +6,13 @@ from pyecharts import options as opts
 import matplotlib.pyplot as plt
 
 
-def salary_python(page):
+def salary_python(urlpri,page):
     """
     获取前程无忧上前page页的Python职位对应的公司名称以及薪水
     :param page: 页数
     :return:返回公司名称与薪水对应的字典
     """
-    urlpri = 'https://search.51job.com/list/070200,000000,0000,00,9,99,Python,2,{page}.html'
+    # urlpri = 'https://search.51job.com/list/070200,000000,0000,00,9,99,Python,2,{page}.html'
     info = {}
     for i in range(1,page+1):
         url = urlpri.format(**{'page':i})
@@ -189,12 +189,13 @@ def over(df, num):
     over = len(overList)*1.0/len(salaryList)
     return over
 
+def test():
+    url = 'https://search.51job.com/list/070200,000000,0000,00,9,99,Python,2,{page}.html'
+    urljava = 'https://search.51job.com/list/070200,000000,0000,00,9,99,java,2,{page}.html'
+    salaryDict = salary_python(urljava, 3)  # 获取前三页工资，原始数据
+    dfSalary = cleanData(salaryDict)  # 处理过的数据
 
-if __name__ == '__main__':
-    salaryDict = salary_python(3) #获取前三页工资，原始数据
-    dfSalary = cleanData(salaryDict) #处理过的数据
-
-    print(over(dfSalary,10000))  #工资高于10000职位所占比例
+    print(over(dfSalary, 10000))  # 工资高于10000职位所占比例
 
     li = dfSalary.salary.tolist()
     line = (
@@ -205,8 +206,12 @@ if __name__ == '__main__':
     )
     line.render()
 
-    saveDataCsv(dfSalary)  #保存数据到csv
+    saveDataCsv(dfSalary)  # 保存数据到csv
     dfSalary.plot()
-    plt.show()  #绘制折现图表
+    plt.show()  # 绘制折现图表
 
     print(dfSalary.describe())
+
+
+if __name__ == '__main__':
+    test()
