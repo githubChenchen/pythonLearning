@@ -6,7 +6,7 @@ import os,shutil
 
 def rename():
     filedirectory = r'C:\Users\Administrator\Desktop\diary'
-    targetDirectory = r'E:\陈晨\新建文件夹\日记'
+    targetDirectory = r'C:\Users\Administrator\Desktop\新建文件夹'
     fileList = os.listdir(filedirectory)
     for file in fileList:
         filename = os.path.join(filedirectory, file)
